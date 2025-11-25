@@ -34,10 +34,10 @@ Para realizar lo que sería la estructura general de la página web: cabecera, m
 En el menú horizontal, decidí crear un sub-menú desplegable para las actividades, y que al clickear en estas te llevasen también a la página de cada actividad; el menú Home que te llevará a portada.html; otro sub-menú desplegable para una página extra que creé de Montañar y un último menú no funcional para lo que sería una página de contacto.
 
 
-![Portada](https://github.com/carmenxufdz/SIBW_UGR/blob/main/P1/portada.jpg)
+![Portada](https://github.com/carmenxufdz/practicasUGR/blob/main/SIBW/P1/portada.jpg)
 
-![Actividad](https://github.com/carmenxufdz/SIBW_UGR/blob/main/P1/actividad.jpg)
+![Actividad](https://github.com/carmenxufdz/practicasUGR/blob/main/SIBW/P1/actividad.jpg)
 
 Para actividad_imprimir.html utilizo un CSS diferente y propio para crear  un estilo de hoja de imprenta. Se usan fuentes más legibles y todo está en blanco y negro, incluido el logo.
 
-![Imprimir](https://github.com/carmenxufdz/SIBW_UGR/blob/main/P1/imprimir.jpg)
+![Imprimir](https://github.com/carmenxufdz/practicasUGR/blob/main/SIBW/P1/imprimir.jpg)

@@ -38,4 +38,4 @@ zonaTextoNuevoComentario.addEventListener("keypress", filtroPalabras)
 ```
 Decidí poner el formulario para enviar comentarios al principio, pues no era capaz de que el comentario nuevo se añadiese al final de los anteriores y encima del formulario... Además me he tomado la libertad de que el formato de las palabras prohibidas, en vez de que se muestre cada caracter con *, se mostrará el primer caracter seguido de los siguientes, éstos si transformados a *
 
-![Imprimi](https://github.com/carmenxufdz/SIBW_UGR/blob/main/P2/comentario.jpg)
+![Imprimi](https://github.com/carmenxufdz/practicasUGR/blob/main/SIBW/P2/comentario.jpg)

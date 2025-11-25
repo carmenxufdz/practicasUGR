@@ -1,0 +1,72 @@
+.body{
+    color:black;
+    background-color:white;
+}
+
+.logo {
+    justify-content: center;
+    align-items: center;
+    float: left;
+    padding-right: 5%;
+    width: 100px; /* Ajusta el ancho del logo */
+    height: 100px; /* Ajusta el alto del logo */
+}
+
+
+.titulo{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    align-items: center;
+    text-align: center;
+    font-size: 64px;
+}
+
+.foot{
+    display: grid;
+    grid-template-columns: 90% 10%;
+    text-align: center;
+    margin: 5px;
+    padding-top: 1%;
+}
+
+.foot .info{
+    text-align: center;
+    padding-left: 10%;
+}
+
+
+/*ACTIVIDADES*/
+
+.informacion{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    
+}
+
+.informacion .titulo_y_extras{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border: none;
+    text-align: center;
+}
+.informacion .titulo{
+    font-size: 44px;
+    margin-bottom: 0%;
+    margin-top: 0%;
+}
+
+.informacion .extra{
+    font-size: 20px;
+}
+.informacion .cuerpo{
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 3%;
+    padding-right: 3%;
+    border: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.informacion .cuerpo b{
+    font-size: 20px;
+}

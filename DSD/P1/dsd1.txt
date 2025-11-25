@@ -1,0 +1,19 @@
+PRACTICA 1
+
+EJERCICIO 1
+ssh alissea 127.0.0.1 -p22
+
+EJERCICIO 2
+ssh -X alissea@127.0.0.1 -p22
+xeyes
+
+EJERCICIO 3 
+scp archivo /home/alissea/...
+
+EJERCICIO 4
+sftp alissea@127.0.0.1
+get archivo
+
+EJERCICIO 5: Crear una clave en el cliente y pasarsela al servidor y asi poder acceder a ssh sin contraseña
+ssh-ketygen -b 4096 -t rssa
+ssh-copy-id alissea@127.0.0.1 -p 22

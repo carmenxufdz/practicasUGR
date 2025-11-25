@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://156b7nehvxi7"]
+
+[ext_resource type="AudioStream" uid="uid://64arlrhjq7ba" path="res://sound/5. The night of Christmas.wav" id="1_8ywlr"]
+
+[node name="Music" type="AudioStreamPlayer"]
+process_mode = 3
+stream = ExtResource("1_8ywlr")
+volume_db = -10.0

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+
+<head>
+
+    {% block head %}
+    <meta name="description" content="Practica 1 SIBW"/>
+    <meta name="author" content="Carmen Chunyin Fernández Núñez"/>
+
+    <link rel="stylesheet" href="css/styles.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Amaranth:ital,wght@0,400;0,700;1,400;1,700&family=Yeseva+One&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Yeseva+One&display=swap" rel="stylesheet"/>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/busqueda.js"></script>
+    {%endblock%}
+
+    <link rel="shortcut icon" href="imagenes/logo/logo.ico" />
+</head>
+
+<header>
+    {% block header %}
+    <!-- CABECERA -->
+    <div class="header">
+        <a href="index.php"><img src="imagenes/logo/logo.png" alt="logo" class="logo"/></a>
+        <h1 class="titulo">Under the Mountain</h1>
+    </div>
+
+    <!-- BARRA DEL MENU-->
+    <div class="menu">
+        <div class="menu_item" style="border-left:none"> </div>
+
+        <div class="menu_item">
+            <button><a href="index.php">Home</a></button>
+        </div>
+
+        <!-- BARRA DESPLEGABLE DE ACTIVIDADES -->
+        <div class="menu_item">
+            <button>Actividades</button>
+            <ul class="submenu">
+                {% for item in menu[0] %}
+                <li><a href="actividad.php?id={{ item.id }}">{{ item.actividad }}</a></li>
+                {% endfor %}
+            </ul>
+            </div>
+
+        <!-- BARRA DESPLEGABLE DE LUGARES -->
+        <div class="menu_item">
+            <button>Nuestras Cumbres</button>
+            <ul class="submenu">
+                {% for item in menu[1] %}
+                <li><a href="mountain.php?id={{ loop.index0 }}">{{ item.mountain }}</a></li>
+                {% endfor %}               
+            </ul>
+        </div>
+
+        {% if usuario == 0 %}
+        <div class="menu_item" style="border-right:none">
+            <div class="login">
+                <button><a href="login.php">Log In</a></button>
+                <p>/</p>
+                <button><a href="register.php">Sing Up</a></button>
+            </div>
+        </div>
+        {% else %}
+        <div class="menu_item" style="border-right:none">
+            <button><a href="logout.php">Log out</a></button>
+        </div>
+        {% endif %}
+    </div>
+    {% endblock %}
+
+    
+</header>
+
+<body>
+
+    <div class="cuerpo">
+    {% block lateral %}
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="buscador">   
+                <input type="text" name="textobusqueda" id="busqueda" placeholder="Buscar..." autocomplete="off" oninput="peticionBusquedaAjax()">
+                <div class="resultado" id="resultados" style="display: none;">
+                    <h1>Resultados de la búsqueda:</h1>
+                </div>
+            </div> 
+            <h1> Enlaces de interes</h1>
+            {% if usuario == 0 %}
+            <a href="#">Link</a>
+            <a href="#">Link</a>
+            <a href="#">Link</a>
+            {% else %}
+                <a href="perfil.php">Modificar mis datos</a>
+                {% if usuario.tipo == "Moderador" or usuario.tipo == "Superusuario" %}
+                <a href="gestionComentarios.php">Gestion de comentarios</a>
+                {% endif %}
+                {% if usuario.tipo == "Gestor" or usuario.tipo == "Superusuario" %}
+                <a href="gestionActividades.php">Gestion de Actividades</a>
+                {% endif %}
+                {% if usuario.tipo == "Superusuario" %}
+                <a href="gestionUsuarios.php">Gestion de usuarios</a>
+            {% endif %}
+          {% endif %} 
+        </aside>
+    {% endblock %}
+
+        <!-- GRID PRINCIPAL -->
+    {% block central %}
+
+    {% endblock %}
+    </div>
+    
+    {% block extra %}
+    {% endblock %}
+</body>
+
+<!-- PIE DE PAGINA-->
+<footer class="foot">
+    {% block footer %}
+    <address>
+        Carmen Chunyin Fernández Núñez
+    </address>
+    <p>© 2024 Sistemas de Información Basados en Web</p>
+    {% endblock %}
+</footer>
+
+</html>

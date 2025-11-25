@@ -1,0 +1,36 @@
+{% extends "padre.html" %}
+
+{% block head %}
+    {{ parent() }}
+    <title>Gestion de Comentarios</title>
+
+{% endblock %}
+
+{% block central %}
+<div class="extra">
+<table>
+    <tr>
+        <th>Actividad</th>
+        <th>Nombre</th>        
+        <th>Fecha</th>
+        <th>Comentario</th>
+        <th>Operaciones</th>
+    </tr>
+    {%for i in 0..comentarios|length-1%}
+    <tr>
+        <td><a href="actividad.php?id={{comentarios[i]['idActividad']-1}}">{{comentarios[i]['nombreActividad']}}</a></td>
+        <td>{{comentarios[i]['nick']}}</td>
+        <td>{{comentarios[i]['fecha']}}</td>
+        <td>{{comentarios[i]['comentario']}}</td>
+        <td>
+            <a href="editarComentario.php?cm={{comentarios[i]['id']}}">Editar</a>
+            <form action="borrarComentario.php" method="post">
+                <input type="text" name="idComentario" class="oculto" value="{{comentarios[i]['id']}}">
+                <button type="submit">Borrar</button>
+            </form>
+        </td>
+    </tr>
+    {%endfor%}
+</table>
+</div>
+{%endblock%}

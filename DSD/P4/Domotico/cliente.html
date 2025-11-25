@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="uft-8">
+        <title>Cliente</title>
+    </head>
+    <body>
+        <div id="sensores">
+            <h2>Sensores:</h2>
+            <p>Temperatura: <span id="temp"></span>ºC</p>
+            <p>Luminosidad: <span id="lum"></span> lumens</p>
+            <p>Humedad: <span id="hum"></span>%</p>
+            <p>Hora: <span id="hora"></span></p>
+        </div>
+
+        <div id="actuadores">
+            <h2>Actuadores:</h2>
+            <p> Estado de la persiana: <span id="estado_persiana"></span></p>
+			<p> Estado del A/C: <span id="estado_ac"></span></p>
+            <p> Estado del radiador: <span id="estado_radiador"></span></p>
+			<p> Estado del humidificador: <span id="estado_hum"></span></p>
+			<p> Estado del deshumidificador: <span id="estado_deshum"></span></p>
+			<p> Estado de las luces: <span id="estado_luces"></span></p>
+        </div>
+        <div id="boton-acciones">
+			<button id="persiana">Persiana</button>
+			<button id="aire">Aire Acondicionado</button>
+            <button id="radiador">Radiador</button>
+            <button id="humidificador">Humidificador</button>
+            <button id="deshumidificador">Deshumidificador</button>
+            <button id="luces">Luces</button>
+		</div>
+
+        <div>
+            <p><span id="alerta" style="color: red"></span></p>
+		</div>
+
+        <div>
+            <h4>Historial</h4>
+            <div id="resultados"></div>
+    
+        </div>
+
+        <div>
+            <button id="resetear">Resetear BD</button>
+        </div>
+    </body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+
+        function actualizarLista(data) {
+            const listCont = document.getElementById('resultados');
+            while(listCont.firstChild && listCont.removeChild(listCont.firstChild));
+
+            const listElement = document.createElement('ul');
+            listCont.appendChild(listElement);
+
+            const num = data.length;
+            for(var i=0; i<num; i++) {
+                const listItem = document.createElement('li');
+                listItem.innerHTML += "temperatura: " + data[i].temperatura +
+                                    ",  luminosidad: " + data[i].luminosidad +
+                                    ",  humedad: " + data[i].humedad + 
+                                    ",  fecha: " + data[i].time;
+                listElement.appendChild(listItem);
+            }
+        }
+
+        function getTime(){
+            const ahora = new Date();
+            const horas = ahora.getHours();
+            const minutos = ahora.getMinutes();
+            const segundos = ahora.getSeconds();
+            
+            const horaString = (horas < 10? '0' : '') + horas;
+            const minutosString = (minutos < 10? '0' : '') + minutos;
+            const segundosString = (segundos < 10? '0' : '') + segundos;
+            
+            var hora = document.getElementById('hora');
+            hora.innerHTML = horaString + ":" + minutosString + ":" + segundosString;
+        }
+
+        // Llamamos a la función getTime cada segundo
+        setInterval(getTime, 1000);
+        // Llamamos a la función getTime una vez para inicializar la hora
+        getTime();
+
+        const serviceURL = document.URL;
+        const socket = io.connect(serviceURL);
+
+        socket.on('connect', () => {
+            socket.emit('obtener');
+            socket.emit('historico');
+            socket.emit('obtener_estado_persiana');
+            socket.emit('obtener_estado_aire');
+            socket.emit('obtener_estado_radiador');
+            socket.emit('obtener_estado_humidificador');
+            socket.emit('obtener_estado_deshumidificador');
+            socket.emit('obtener_estado_luces');
+            socket.emit('mostrar-alertas');
+        });
+
+        socket.on('obtener', (data) => {
+            var temp = document.getElementById('temp');
+            var lum = document.getElementById('lum');
+            var hum = document.getElementById('hum');
+            temp.innerHTML = data.temperatura;
+            lum.innerHTML = data.luminosidad;
+            hum.innerHTML = data.humedad;
+            
+        });
+
+        socket.on('persiana', function(data){
+			var estado_persiana = document.getElementById('estado_persiana');
+			estado_persiana.innerHTML = data;
+		});
+
+		socket.on('aire', function(data){
+			var estado_ac = document.getElementById('estado_ac');
+			estado_ac.innerHTML = data;
+		});
+
+        socket.on('radiador', function(data){
+			var estado_radiador = document.getElementById('estado_radiador');
+			estado_radiador.innerHTML = data;
+		});
+
+		socket.on('humidificador', function(data){
+			var estado_humidificador = document.getElementById('estado_hum');
+			estado_humidificador.innerHTML = data;
+		});
+        
+        socket.on('deshumidificador', function(data){
+			var estado_deshumidificador = document.getElementById('estado_deshum');
+			estado_deshumidificador.innerHTML = data;
+		}); 
+        
+        socket.on('luces', function(data){
+			var estado_luces = document.getElementById('estado_luces');
+			estado_luces.innerHTML = data;
+		});
+
+        socket.on('actualizar-sensores', (data) => {
+            var temp = document.getElementById('temp');
+            var lum = document.getElementById('lum');
+            var hum = document.getElementById('hum');
+            
+            temp.innerHTML = data.temperatura;
+            lum.innerHTML = data.luminosidad;
+            hum.innerHTML = data.humedad;
+            socket.emit('historico');
+        });
+
+        
+        socket.on('historico', (data) => {
+            actualizarLista(data);
+        });
+
+
+        // BOTONES
+        var botonPersiana = document.getElementById('persiana');
+        botonPersiana.onclick = function(){
+			socket.emit('persiana');
+        }
+
+        var botonAire = document.getElementById('aire');
+        botonAire.onclick = function(){
+			socket.emit('aire');
+        }
+
+        var botonRadiador = document.getElementById('radiador');
+        botonRadiador.onclick = function(){
+			socket.emit('radiador');
+        }
+
+        var botonHumidificador = document.getElementById('humidificador');
+        botonHumidificador.onclick = function(){
+			socket.emit('humidificador');
+        }
+
+        var botonDeshumidificador = document.getElementById('deshumidificador');
+        botonDeshumidificador.onclick = function(){
+			socket.emit('deshumidificador');
+        }
+
+        var botonLuces = document.getElementById('luces');
+        botonLuces.onclick = function(){
+			socket.emit('luces');
+        }
+
+        var botonReseteo = document.getElementById('resetear');
+        botonReseteo.addEventListener('click', (event) => {
+            socket.emit('resetear');
+        });
+
+        socket.on('resetear', () =>{
+            socket.emit('historico');
+            socket.emit('borrar-alertas');
+        });
+
+        socket.on('mostrar-alertas', (alertas) => {
+            const alerta = document.getElementById('alerta');
+            alerta.innerHTML = '';
+            alertas.forEach((alertaIndividual) => {
+                const p = document.createElement('p');
+                p.innerHTML = alertaIndividual;
+                alerta.appendChild(p);
+            });
+        });
+
+        socket.on('disconnect');
+
+    </script>
+</html>

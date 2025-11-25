@@ -1,0 +1,44 @@
+{% extends "padre.html" %}
+
+    {% block styles %}
+    <link rel="stylesheet" href="css/mountain.css"/>
+    <link rel="stylesheet" href="css/styles.css"/>
+    {% endblock %}
+
+
+
+{% block central %}
+    <div class="cuerpo">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <h1> Enlaces de interes</h1>
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+        </aside>
+
+        <!-- TEXTO Y FOTOS -->
+        <div class="informacion">
+            <div class="titulo_y_extras">
+                <h1 class="titulo">{{mountain['nombre']}}</h1>
+                <i class="extra">Altura: {{mountain['altura']}} metros</i>
+            </div>
+            <div class="cuerpo">
+                <div>
+                    <p> 
+                        {{mountain['descripcion1']}}
+                    </p>
+                    <p> 
+                        {{mountain['descripcion2']}}
+                    </p>
+                </div>
+                <div>
+                    <img src="{{mountain['foto']}}" alt="Mountain"/>
+                    <figcaption>{{mountain['piefoto']}}</figcaption>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+{%endblock%}

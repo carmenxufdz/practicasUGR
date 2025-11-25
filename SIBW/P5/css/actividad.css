@@ -1,0 +1,102 @@
+.informacion{
+    align-items: center;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.informacion .titulo_y_extras{
+    border: none;
+    text-align: center;
+}
+.informacion .titulo{
+    font-family: "Amaranth", sans-serif;
+    font-size: 44px;
+    margin-bottom: 0%;
+}
+
+.informacion .extra{
+    font-size: 20px;
+}
+
+/* CUERPO Y FOTOS */
+
+.informacion .cuerpo{
+    font-family: "Titillium Web", sans-serif;
+    padding-left: 5%;
+    padding-right: 5%;
+    border: none;
+    display: grid;
+    text-align: justify;
+    grid-template-columns: 80% 20%;
+    
+}
+
+.informacion .cuerpo p
+{
+    margin-right: 5%;
+}
+.informacion .cuerpo b{
+    font-size: 20px;
+}
+
+.informacion .cuerpo img{
+    margin-right: 5%;
+    margin-top: 10%;
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+.informacion .cuerpo figcaption{
+    font-family: "Titillium Web", sans-serif;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* REDES SOCIALES (BOTONES) */
+.informacion .social{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+}
+
+.informacion .social button{
+    margin: 0 5px; /* espacio entre los botones */
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    background-color: #c5baaa;
+    color: #2c2c2c;
+    text-decoration: none;
+    box-shadow: none;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    border:none;
+    box-sizing: border-box;
+    width: 100px; /* ancho fijo de los botones */
+}
+
+.informacion .social button:hover{
+    text-decoration: none;
+    background-color: #ee7828; 
+    box-shadow: none;
+    box-decoration-break: none;
+    cursor: pointer;
+    border: none;
+}
+
+.informacion .social a{
+    color: #2c2c2c;
+    text-decoration: none;
+    padding: 5px;
+    display: block;
+}
+
+.informacion .social a:hover{
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px;
+    display: block;
+}

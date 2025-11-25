@@ -1,0 +1,26 @@
+ {% extends "padre.html" %}
+
+    {% block central %}
+    <div class="cuerpo">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <h1> Enlaces de interes</h1>
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+        </aside>
+
+        <div class="grid_actividades">
+
+            {% for item in portada %}
+                <div class="grid_item">
+                    <a href="actividad.php?ev={{ loop.index0 }}">
+                        <img src="{{ item.foto_portada }}" alt="{{ item.nombre }}">
+                    </a>
+                    <p>{{ item.nombre }}</p>
+                </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+    {% endblock %}

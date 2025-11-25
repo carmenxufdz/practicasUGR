@@ -1,0 +1,38 @@
+{% extends "padre.html" %}
+
+{% block head %}
+    {{ parent() }}
+    <title>{{mountain['nombre']}}</title>
+
+    <link rel="stylesheet" href="css/mountain.css"/>
+{% endblock %}
+
+
+
+{% block central %}
+
+        <!-- TEXTO Y FOTOS -->
+        <div class="informacion">
+            <div class="titulo_y_extras">
+                <h1 class="titulo">{{mountain['nombre']}}</h1>
+                <i class="extra">Altura: {{mountain['altura']}} metros</i>
+            </div>
+            <div class="cuerpo">
+                <div>
+                    <p> 
+                        {{mountain['descripcion1']}}
+                    </p>
+                    <p> 
+                        {{mountain['descripcion2']}}
+                    </p>
+                </div>
+                <div>
+                    <img src="{{mountain['foto']}}" alt="Mountain"/>
+                    <figcaption>{{mountain['piefoto']}}</figcaption>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+{%endblock%}

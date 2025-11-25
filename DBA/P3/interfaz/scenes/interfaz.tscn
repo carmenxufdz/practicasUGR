@@ -1,0 +1,162 @@
+[gd_scene load_steps=27 format=3 uid="uid://bwmhyk8661biq"]
+
+[ext_resource type="Script" path="res://scenes/interfaz.gd" id="1_4mtjk"]
+[ext_resource type="Texture2D" uid="uid://jgbkrymsca48" path="res://assets/tiles/Snow_1.png" id="3_f3xqj"]
+[ext_resource type="Texture2D" uid="uid://mogukm54hexv" path="res://assets/tiles/Snow_4.png" id="6_jyjb1"]
+[ext_resource type="FontFile" uid="uid://b6ry2e635jugo" path="res://assets/monogram.ttf" id="7_116ro"]
+[ext_resource type="Texture2D" uid="uid://wrngq86w1ye2" path="res://assets/tiles/Ice.png" id="8_fm2k0"]
+[ext_resource type="Texture2D" uid="uid://cdcmxrg8sw57s" path="res://assets/characters/santa idle.png" id="8_lnbei"]
+[ext_resource type="Texture2D" uid="uid://b00cejyafmq65" path="res://assets/characters/Priest-Idle.png" id="8_v0djo"]
+[ext_resource type="Texture2D" uid="uid://sldrin2mdfwo" path="res://assets/characters/rb_189.png" id="9_uop4l"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ao5qn"]
+texture = ExtResource("3_f3xqj")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8itsp"]
+texture = ExtResource("6_jyjb1")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k5i5j"]
+texture = ExtResource("8_fm2k0")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_y1p6m"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_ao5qn")
+sources/1 = SubResource("TileSetAtlasSource_8itsp")
+sources/2 = SubResource("TileSetAtlasSource_k5i5j")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_33k8a"]
+atlas = ExtResource("8_v0djo")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qx6uw"]
+atlas = ExtResource("8_v0djo")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqex4"]
+atlas = ExtResource("8_v0djo")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjcuk"]
+atlas = ExtResource("8_v0djo")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ja86p"]
+atlas = ExtResource("8_v0djo")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d70bg"]
+atlas = ExtResource("8_v0djo")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_of8db"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33k8a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qx6uw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqex4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjcuk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ja86p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d70bg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfepn"]
+atlas = ExtResource("9_uop4l")
+region = Rect2(0, 160, 128, 128)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4bck1"]
+font = ExtResource("7_116ro")
+font_size = 50
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qudr0"]
+atlas = ExtResource("8_lnbei")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w223j"]
+atlas = ExtResource("8_lnbei")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oopw3"]
+atlas = ExtResource("8_lnbei")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vdj4g"]
+atlas = ExtResource("8_lnbei")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t1pww"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qudr0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w223j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oopw3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vdj4g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Interfaz" type="Node2D"]
+script = ExtResource("1_4mtjk")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_y1p6m")
+rendering_quadrant_size = 32
+format = 2
+layer_0/name = "suelo"
+layer_1/name = "recorrido"
+
+[node name="Agente" type="AnimatedSprite2D" parent="."]
+position = Vector2(14, 15)
+sprite_frames = SubResource("SpriteFrames_of8db")
+frame = 2
+frame_progress = 0.683653
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Agente"]
+
+[node name="Deer" type="Sprite2D" parent="."]
+position = Vector2(43, 16)
+texture = SubResource("AtlasTexture_xfepn")
+
+[node name="Energia" type="Label" parent="."]
+offset_left = 1024.0
+offset_top = 352.0
+offset_right = 1216.0
+offset_bottom = 393.0
+text = "0"
+label_settings = SubResource("LabelSettings_4bck1")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 358)
+
+[node name="Santa" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_t1pww")

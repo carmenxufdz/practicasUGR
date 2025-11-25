@@ -1,0 +1,35 @@
+{% extends "padre.html" %}
+
+{% block head %}
+    {{ parent() }}
+    <title>Profile</title>
+
+{% endblock %}
+
+{% block central %}
+<div class="extra">
+    <div>
+        <h3>Datos actuales:</h3>
+        <p>Nombre de usuario: {{usuario.nick}}</p>
+        <p>Email: {{usuario.email}}</p>
+        <p>Tipo de cuenta: {{usuario.tipo}}</p>
+    </div>
+    <div>
+        <h3>Cambio de datos</h3>
+        <form action="perfil.php" method="post">
+            <p>Nuevo nick: <input type="text" name="newnick" class="inputs"></p>
+            <p>Nuevo email: <input type="text" name="newemail" class="inputs"></p>        
+            <p>Nueva contraseña: <input type="password" name="newpass"></p>
+            <br>
+            <p>Contraseña actual: <input type="password" name="pass"></p>
+            <p><input type="submit" value="Modificar datos"></p>
+        </form>
+    </div>
+    {% if error == 1 %}
+    <p><strong>Debe rellenar todos los campos</strong></p>
+    {% endif %}
+    {% if error == 2 %}
+    <p><strong>¡¡Contraseña incorrecta!!</strong></p>
+    {% endif %}
+</div>
+{%endblock%}

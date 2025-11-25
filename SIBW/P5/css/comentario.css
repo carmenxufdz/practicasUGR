@@ -1,0 +1,101 @@
+#desplegable{
+    /* El desplegable incluye a la caja de los comentarios y el boton */
+    position:fixed;
+    height: 100%;
+    top: 0;
+    left: calc(-1 * min(600px, 55vw)); /* arreglamos el desplegable para que quede fuera de la pantalla */
+    display: flex;
+    z-index: 10;
+}
+
+#caja-comentarios{
+    color:#2c2c2c;
+    display: grid;
+    grid-template-rows: 10%, 90%;
+    width: min(600px, 55vw);
+    gap: 0.7vh;
+    overflow: hidden auto;
+    background-color: #c5baaa;
+    box-shadow: 0 15px 15px rgba(0, 0, 0, 0.5);
+
+}
+
+
+.menu-boton{
+    align-self: center;
+}
+
+.menu-boton img{
+    width: 150%;
+}
+
+#boton-comentario{
+    width: min(60px, 20vw);
+    background-color: transparent;
+    border: 0;
+}
+
+
+/* Container generico de los comentarios */
+.comentario-container{
+    color: #ffffff;
+    border-radius: 0.5vh;
+    border: solid 1px #2c2c2c;    
+    margin: 10px;
+    background-color: #806d61;
+    display: grid;
+    grid-template-rows: repeat(4, auto);
+    grid-auto-columns: 100%;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+}
+
+.nombre-comentario{
+    text-align: center;
+    font-weight: bold;
+    font-size: 120%;
+    margin: 1%;
+}
+
+.contenido-comentario{
+    color: #2c2c2c;
+    padding: 10px;
+    text-align: justify;
+    background-color: white;
+    border-bottom-left-radius: 0.5vh;
+    border-bottom-right-radius: 0.5vh;
+}
+
+#submit-comentario{
+    padding: 2%;
+    background-color: #c5baaa;;
+}
+
+.fecha{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+input{
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+button{
+    cursor: pointer;
+}
+
+#comentario-nuevo{
+    width: 90%;
+    height: 100px;
+    resize: none;
+}
+
+.comentario-email{
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+#palabras_baneadas{
+    display:none;
+}

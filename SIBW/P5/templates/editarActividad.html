@@ -1,0 +1,25 @@
+{% extends "padre.html" %}
+
+{% block head %}
+    {{ parent() }}
+    <title>Editar una Actividad</title>
+{% endblock %}
+
+{% block central %}
+<div class="extra">
+    <h2>Edición de actividad:</h2>
+    <form action="editarActividad.php" method="POST"  enctype="multipart/form-data">
+        <input type="text" name="idActividad"  value="{{actividad.actividades.id}}">
+        <p>Nombre: <input type="text" name="nombre" value="{{actividad.actividades.nombre}}"></p>
+        <p>Precio: <input type="text" name="precio" value="{{actividad.actividades.precio}}"></p>
+        <p>Grupos: <input type="text" name="grupos" value="{{actividad.actividades.grupos}}"></p>
+        <p>Fecha: <input type="text" name="fecha" value="{{actividad.actividades.fecha}}"></p>
+        <p>Foto Portada: <input type="file" name="foto_portada" /></p>
+        <textarea name="descripcion1" rows="20" cols="50">{{actividad.actividades.descripcion1}}</textarea>
+        <textarea name="descripcion2" rows="20" cols="50">{{actividad.actividades.descripcion2}}</textarea>
+        <p>Publicado(0/1): <input type="number" name="publicado" value="{{actividad.actividades.publicado}}"/></p>
+        <br>
+        <button type="submit">Editar Actividad</button>
+    </form>
+</div>
+{% endblock %}

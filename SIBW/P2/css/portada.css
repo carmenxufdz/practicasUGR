@@ -1,0 +1,38 @@
+/* GRID DE LA PORTADA*/
+
+.grid_actividades{
+    display:grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr)); 
+    gap: 20px; /* Espacio entre los elementos */
+    border:none;
+    padding: 10px;
+    margin: 5px; 
+}
+
+.grid_item {
+    display: flex;
+    flex-direction: column;
+    padding:5%;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    background-size: cover;
+}
+
+.grid_item img {
+    width: 100%;
+    height: auto;
+    margin: 0px;
+}
+
+.grid_item p {
+    display: block;
+    background-color: #c5baaa;;
+    text-align: center;
+    font-size: 120%;
+    margin-top: auto;
+    color: #2c2c2c;
+    width: 100%;
+}
+

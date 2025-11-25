@@ -1,0 +1,25 @@
+ {% extends "padre.html" %}
+
+{% block head %}
+{{ parent() }}
+    <title>Under the Mountain</title>
+
+    <link rel="stylesheet" href="css/portada.css"/>
+{% endblock %}
+
+{% block central %}
+    <div class="grid_actividades">
+
+        {% for item in portada %}
+            {% if item.publicado == 1 %}
+            <div class="grid_item">
+                <a href="actividad.php?id={{ item.id }}">
+                    <img src="{{ item.foto_portada }}" alt="{{ item.nombre }}">
+                </a>
+                <p>{{ item.nombre }}</p>
+            </div>
+            {%endif%}
+        {% endfor %}
+            
+    </div>
+{% endblock %}

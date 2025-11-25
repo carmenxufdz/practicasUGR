@@ -1,0 +1,51 @@
+{% extends "padre.html" %}
+
+{% block head %}
+    {{ parent() }}
+    <title>Crear Actividad</title>
+{% endblock %}
+
+{% block central %}
+<div class="extra">
+    {% for e in errores %}
+        <p>{{e}}</p>
+    {% endfor %}
+
+    <h3>Crear una nueva actividad</h3>
+    <!-- importante el multipart/form-data -->
+    <form action="addActividad.php" method="post" enctype="multipart/form-data">
+
+        <p>Nombre de la actividad</p>
+        <input type="text" name="nombre">
+
+        <p>Precio</p>
+        <input type="text" name="precio">
+
+        <p>Número máximo de personas</p>
+        <input type="text" name="grupos">
+
+        <p>Fecha</p>
+        <input type="text" name="fecha">
+
+        <p>Un poco de informacion</p>
+        <textarea name="descripcion1" cols="45" rows="15"></textarea>
+        <textarea name="descripcion2" cols="45" rows="15"></textarea>
+
+        <h4>Imágenes</h4>
+        <h4>Imagen de Portada</h4>
+        <input type="file" name="foto_portada" />
+
+        <p>Imagen 1</p>
+        <input type="file" name="path_foto1" />
+        <p>Pie 1</p>
+        <input type="text" name="pie_foto1">
+        <p>Imagen 2</p>
+        <input type="file" name="path_foto2" />
+        <p>Pie 2</p>
+        <input type="text" name="pie_foto2">
+        <br>
+        <br>
+        <button type="submit">Crear Actividadad</button>
+    </form>
+</div>
+{%endblock%}

@@ -1,0 +1,143 @@
+/* PAGINA ENTERA */
+body{
+    color:#ffffff;
+    background-color: #806d61;
+    font-family: "Titillium Web", sans-serif;
+}
+
+
+/* CABECERA */
+.header{ 
+    display: grid;
+    grid-template-columns: 10% 90%;
+}
+
+.logo {
+    justify-content: center;
+    align-items: center;
+    float: left;
+    padding: 0px 20px;
+    width: 150px; /* Ajusta el ancho del logo */
+    height: 150px; /* Ajusta el alto del logo */
+}
+
+.titulo{
+    font-family: "Amaranth", sans-serif;
+    align-items: center;
+    text-align: center;
+    font-size: 64px;
+    line-height: 60px;
+}
+
+/* BARRA MENU */
+.menu{
+    background-color: #c5baaa;
+    display:grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    text-align: center;
+}
+
+.menu_item{
+    position: relative;
+    border-right: 1px solid #ee7828;
+    border-left: 1px solid #ee7828;
+    display:grid;
+    color:#2c2c2c;
+    background-color: #c5baaa;
+    
+}
+.menu_item a{
+    font-family: "Titillium Web", sans-serif;
+    color: #2c2c2c;
+    text-decoration: none;
+    padding: 5px;
+    display: block;
+}
+
+.menu_item a:hover{
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px;
+    display: block;
+}
+
+.menu_item button {
+    font-family: "Titillium Web", sans-serif;
+    font-size: 16px;
+    background-color: #c5baaa;
+    color: #2c2c2c;
+    text-decoration: none;
+    padding: 5px;
+    box-shadow: none;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    border:none;
+}
+
+.menu_item button:hover{
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #ee7828; 
+    box-shadow: none;
+    box-decoration-break: none;
+    cursor: pointer;
+    border: none;
+}
+.menu_item:hover .submenu {
+    font-family: "Titillium Web", sans-serif;
+    display: block;
+}
+/* SUBMENU (BARRA DESPLEGABLE)*/
+.submenu {
+    display: none;
+    list-style-type: none;
+    list-style: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #c5baaa;
+    color: #2c2c2c;
+    border: none;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    z-index: 1;
+}
+.submenu li{
+    padding: 5px;
+}
+.submenu li:hover {
+    background-color: #ee7828;
+    color: #ffffff;
+}
+
+/* CENTRO Y SIDEBAR*/
+.cuerpo{
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+.sidebar{
+    height:auto;
+    border-right: 1px solid #ee7828;
+    padding: 0 5%;
+    box-sizing: border-box;
+}
+
+.sidebar a{
+    color:#ffffff;
+    border:none;
+    text-decoration: none;
+}
+
+.sidebar a:hover{
+    color:#ee7828;
+    border:none;
+    text-decoration: none;
+}
+
+
+.foot{
+    text-align: center;
+}

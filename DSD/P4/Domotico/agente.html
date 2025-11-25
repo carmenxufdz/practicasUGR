@@ -1,0 +1,187 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Agente</title>
+	</head>
+
+	<body>
+        <h2>Estado del agente</h2>
+	    <p id="estado_agente">Inactivo</p>
+        <h2>Hora actual: <span id="hora"></span></h2>
+
+        <script src="/socket.io/socket.io.js"></script>
+
+	<script type="text/javascript">
+		var serviceURL = 'localhost:8080';
+		var socket = io.connect(serviceURL);
+
+        function getTime(){
+            const ahora = new Date();
+            const horas = ahora.getHours();
+            const minutos = ahora.getMinutes();
+            const segundos = ahora.getSeconds();
+            
+            const horaString = (horas < 10? '0' : '') + horas;
+            const minutosString = (minutos < 10? '0' : '') + minutos;
+            const segundosString = (segundos < 10? '0' : '') + segundos;
+            
+            var hora = document.getElementById('hora');
+            hora.innerHTML = horaString + ":" + minutosString + ":" + segundosString;
+        }
+
+        // Llamamos a la función getTime cada segundo
+        setInterval(getTime, 1000);
+        // Llamamos a la función getTime una vez para inicializar la hora
+        getTime();
+
+		var temp_maxima = 30;
+        var temp_min = 15;
+		var lum_maxima = 500;
+        var lum_min = 100;
+        var hum_maxima = 60;
+        var hum_min = 30;
+        var hora_encender = 21;
+        var hora_apagar = 7;
+
+		var temp_actual = 0;
+		var lum_actual = 0;
+        var hum_actual = 0;
+
+		var estado_persiana = '';
+        var estado_ac = '';
+        var estado_radiador = '';
+        var estado_humidificador = '';
+        var estado_deshumidificador = '';
+        var estado_luces = '';
+
+        socket.on('connect', function(params) {
+			document.getElementById("estado_agente").innerText = "Activo";
+			socket.emit('obtener');
+            socket.emit('obtener_estado_persiana');
+            socket.emit('obtener_estado_aire');
+            socket.emit('obtener_estado_radiador');
+            socket.emit('obtener_estado_humidificador');
+            socket.emit('obtener_estado_deshumidificador');
+            socket.emit('obtener_estado_luces');
+        });
+
+        socket.on('obtener', (data) => {
+            
+        });
+
+        socket.on('persiana', function(data){
+			estado_persiana = data;
+		});
+
+		socket.on('aire', function(data){
+			estado_ac = data;
+		});
+
+        socket.on('radiador', function(data){
+			estado_radiador = data;
+		});
+
+		socket.on('humidificador', function(data){
+			estado_humidificador = data;
+		});
+        
+        socket.on('deshumidificador', function(data){
+			estado_deshumidificador = data;
+		}); 
+        
+        socket.on('luces', function(data){
+			estado_luces = data;
+		});
+
+
+        socket.on('actualizar-sensores', (data) =>{
+
+            temp_actual = data.temperatura;
+            lum_actual = data.luminosidad;
+            hum_actual = data.humedad;
+
+            if(temp_actual > temp_maxima && estado_ac == 'apagado'){
+                socket.emit('aire');
+				socket.emit('alerta', "ALERTA: Mucha Calor!! Encendiendo el aire");
+            }
+            else if(temp_actual < temp_min && estado_ac == 'encendido'){
+                socket.emit('aire');
+                socket.emit('alerta', "ALERTA: Mucho Frio!! Apagando el aire");
+            }
+
+            if(temp_actual > temp_maxima && estado_radiador == 'encendido'){
+                socket.emit('radiador');
+				socket.emit('alerta', "ALERTA: Mucha Calor!! Apagando el radiador");
+            }
+            else if(temp_actual < temp_min && estado_radiador == 'apagado'){
+                socket.emit('radiador');
+                socket.emit('alerta', "ALERTA: Mucho Frio!! Encendiendo el radiador");
+            }
+
+            if(lum_actual > lum_maxima && estado_persiana == 'abierta'){
+                socket.emit('persiana');
+                socket.emit('alerta', "ALERTA: Mucha Luz!! Cerrando las persianas");
+            }
+            else if(lum_actual < lum_min && estado_persiana == 'cerrada'){
+                socket.emit('persiana');
+                socket.emit('alerta', "ALERTA: Poca Luz!! Abriendo las persianas");
+            }
+
+            if(hum_actual > hum_maxima && estado_humidificador == 'encendido'){
+                socket.emit('humidificador');
+                socket.emit('alerta', "ALERTA: Mucha Humedad!! Apagando el humidificador");
+            }
+            else if(hum_actual < hum_min && estado_humidificador == 'apagado'){
+                socket.emit('humidificador');
+                socket.emit('alerta', "ALERTA: Mucha Humedad!! Encendiendo el humidificador");
+            }
+
+            if(hum_actual > hum_maxima && estado_deshumidificador == 'apagado'){
+                socket.emit('deshumidificador');
+                socket.emit('alerta', "ALERTA: Mucha Humedad!! Encendiendo el deshumidificador");
+            }
+            else if(hum_actual < hum_min && estado_deshumidificador == 'encendido'){
+                socket.emit('deshumidificador');
+                socket.emit('alerta', "ALERTA: Mucha Humedad!! Apagando el deshumidificador");
+            }
+            socket.emit('mostrar-alertas');
+            
+        })
+
+        const controlLuces = () => {
+            const ahora = new Date();
+            const hora = ahora.getHours();
+
+            console.log(estado_luces)
+            if((hora >= hora_encender || hora < hora_apagar) && estado_luces == 'apagadas'){
+                socket.emit('luces')
+                socket.emit('alerta', "Se ha hecho de noche, encendiendo las luces");
+           
+            }
+            else if(hora >= hora_apagar && hora < hora_encender && estado_luces == 'encendidas'){
+                socket.emit('luces')
+                socket.emit('alerta', "Es de dia, apagando las luces");
+            }
+
+            if((hora >= hora_encender || hora < hora_apagar) && estado_persiana == 'abierta'){
+                socket.emit('persiana');
+                socket.emit('alerta', "Se ha hecho de noche, cerrando la persiana");
+            }
+            else if(hora >= hora_apagar && hora < hora_encender && estado_persiana == 'cerrada'){
+                socket.emit('persiana');
+                socket.emit('alerta', "Es de dia, sube las persianas");
+            }
+            
+            socket.emit('mostrar-alertas');
+        }
+
+        setInterval(controlLuces, 5000);
+        controlLuces();
+
+        socket.on('disconnect', function(params) {
+			document.getElementById("estado_agente").innerText = "Inactivo";
+            
+        });
+		
+	</script>
+	</body>

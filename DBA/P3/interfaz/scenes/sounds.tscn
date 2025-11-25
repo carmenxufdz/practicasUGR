@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bid0gyrki18uf"]
+
+[ext_resource type="Script" path="res://sounds.gd" id="1_udu8b"]
+
+[node name="Sounds" type="Node"]
+script = ExtResource("1_udu8b")
+
+[node name="AudioPlayers" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioPlayers"]
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="AudioPlayers"]
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="AudioPlayers"]
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="AudioPlayers"]

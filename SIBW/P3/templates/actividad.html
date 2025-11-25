@@ -1,0 +1,120 @@
+{% extends "padre.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="css/actividad.css"/>
+<link rel="stylesheet" href="css/comentario.css"/>
+<link rel="stylesheet" href="css/styles.css"/>
+
+<script src="js/comentario.js" defer></script>
+{% endblock %}
+
+
+{% block central %}
+    <div class="cuerpo">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <h1> Enlaces de interes</h1>
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+        </aside>
+        
+        <!-- TEXTO Y FOTOS -->
+        <div class="informacion">
+            <div class="titulo_y_extras">
+                <h1 class="titulo">{{actividad.actividades.nombre}}</h1>
+                <i class="extra">Precio: {{actividad.actividades.precio}}€ por persona</i>
+                <br>
+                <i class="extra">Máximo de personas por grupo: {{actividad.actividades.grupos}}</i>
+                <br>
+                <i class="extra">{{actividad.actividades.fecha}}</i>
+            </div>
+            <div class="cuerpo">
+                <div>
+                    <p>
+                        {{actividad.actividades.descripcion1}}
+                    </p>
+                    <p>
+                        {{actividad.actividades.descripcion2}}
+                    </p>
+                </div>
+                <div>
+                    {% for item in actividad.imagenes %}
+                    <img src="{{item.foto}}" alt="foto"/>
+                    <figcaption>{{item.piefoto}}</figcaption>
+                    {%endfor%}
+                </div>
+            </div>
+
+            <!-- REDES SOCIALES -->
+            <div class="social">
+                <button><a href="#">Facebook</a></button>
+                <button><a href="#">Twitter</a></button>
+                <button><a href="actividad_imprimir.html">Imprimir</a></button>
+            </div>
+            
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block extra %}
+
+    <!-- SECCION DE COMENTARIOS -->
+    <div id="desplegable">
+        <div id="caja-comentarios">
+            <!-- Pequeño truqui para traernos al html las palabras y poder acceder a ellas con el javascript
+            saldran tal que: -primera-segnuda-tercera--->
+            <div id="palabras_baneadas">
+                {%for i in 0..baneadas|length-1%}
+                    {{baneadas[i]}}
+                {%endfor%}
+            </div>
+            <div id="submit-comentario">
+                <h3>Escribir comentario</h3>
+                <form>
+                    <label>Nombre:
+                        <input type="text"  id="nombre" placeholder="Nombre y Apellidos">
+                    </label>
+
+                    <label>Correo: 
+                        <input type="email"  id="email" placeholder="ejemplo@ejemplo.org">
+                    </label>
+
+                    <label>Comentario: 
+                        <textarea id="comentario-nuevo" placeholder="Introduzca el comentario"></textarea>
+                    </label>
+                    
+                    <button type="button" id="submit">Submit</button>
+                </form>
+            </div>
+
+            {% if comentarios|length > 0 %}
+            {% for i in 0..comentarios|length-1 %}
+                <div class="comentario-container">
+                    <div class="nombre-comentario">
+                        {{ comentarios[i]['nombre'] }}
+                    </div>
+                    <div class="comentario-email">
+                        {{ comentarios[i]['email'] }}
+                    </div>
+                    <div class="fecha">
+                        {{ comentarios[i]['fecha'] }}
+                    </div>
+                    <div class="contenido-comentario">
+                        {{ comentarios[i]['comentario'] }}                
+                    </div>
+                </div>
+            {% endfor %}
+            {% endif %}
+            
+        </div>
+        <div class="menu-boton">
+            <form>
+                <button type="button" id="boton-comentario">
+                    <img src="imagenes/comment.png"/>
+                </button>
+            </form>
+        </div>
+    </div>  
+{%endblock%}

@@ -1,0 +1,46 @@
+{% extends "padre.html" %}
+
+{% block head %}
+    {{ parent() }}
+    <title>Gestion de Actividades</title>
+{% endblock %}
+
+{% block central %}
+<div class="extra">
+    <p><strong><a href="addActividad.php">Para crear una nueva actividad haz click aqui</a></strong></p>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Max. Personas</th>
+            <th>Fecha</th>
+            <th>Publicado</th>
+            <th>Operaciones</th>
+        </tr>
+        {%for i in 0..listaActividad|length-1%}
+        <tr>
+            <td>{{listaActividad[i]['idActividad']}}</td>
+            <td><a href="actividad.php?id={{listaActividad[i]['idActividad']-1}}">{{listaActividad[i]['nombre']}}</a></td>
+            <td>{{listaActividad[i]['precio']}}</td>
+            <td>{{listaActividad[i]['grupos']}}</td>
+            <td>{{listaActividad[i]['fecha']}}</td>
+            <td>
+                {% if listaActividad[i]['publicado'] == 1 %}
+                Sí
+                {% else %}
+                No
+                {% endif %}
+            </td>
+            <td>
+                <a href="editarActividad.php?id={{listaActividad[i]['idActividad']}}">Editar</a>
+                <form action="borrarActividad.php" method="post">
+                    <input type="text" name="id" class="oculto" value="{{listaActividad[i]['idActividad']}}">
+                    <button type="submit">Borrar</button>
+                </form>
+            </td>
+        </tr>
+        {%endfor%}
+    </table>
+</div>
+{% endblock %}

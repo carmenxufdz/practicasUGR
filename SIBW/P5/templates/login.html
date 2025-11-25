@@ -1,0 +1,21 @@
+{% extends "padre.html" %}
+
+{% block head %}
+{{ parent() }}
+   <title>Log In</title>
+
+{% endblock %}
+
+{% block central %}
+    <div class="extra">
+        {%if error == 1%}
+        <p>¡Te has equivocado con el Usuario o con la Contraseña! ¡Inténtalo de nuevo!</p>
+        {%endif%}
+        
+        <form action="login.php" method="POST">
+            <p>User: <input type="text" name="nick" class="inputs"></p>
+            <p>Password: <input type="password" name="pass" class="inputs"></p>
+            <p><input type="submit" value="Log In"></p>
+        </form>
+    </div>
+{%endblock%}

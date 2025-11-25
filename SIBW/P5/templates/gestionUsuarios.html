@@ -1,0 +1,40 @@
+{% extends "padre.html" %}
+
+{% block head %}
+    {{ parent() }}
+    <title>Gestion de Comentarios</title>
+{% endblock %}
+
+{% block central %}
+<div class="extra">
+    {%if error != "Null"%}
+       <p>{{error}}</p>
+    {%endif%}
+    <table>
+        <tr>
+            <th>Nick</th>
+            <th>Email</th>
+            <th>Tipo</th>
+            <th>Nuevo rol</th>
+        </tr>
+        {%for i in 0..usuarios|length-1%}
+        <tr>
+            <td>{{usuarios[i]['nick']}}</td>
+            <td>{{usuarios[i]['email']}}</td>
+            <td>{{usuarios[i]['tipo']}}</td>
+            <td>
+                <form action="gestionUsuarios.php" method="post" name="form{{i}}">
+                <input type="text" name="nick" value="{{usuarios[i]['nick']}}" class="oculto">
+                <select name="nuevotipo">
+                    <option value="Registrado" selected>Registrado</option>
+                    <option value="Moderador">Moderador</option>
+                    <option value="Gestor">Gestor</option>
+                    <option value="Superusuario">Superusuario</option>
+                </select>
+                <button type="submit">Aplicar cambios</button>
+                </form>
+            </td>
+        {%endfor%}
+    </table>
+</div>
+{%endblock%}

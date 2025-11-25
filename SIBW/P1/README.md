@@ -25,7 +25,7 @@ El objetivo de esta práctica es el diseño de tres páginas con HTML + CSS, a s
     - Sin botones de redes sociales
 
 <p align="center">
-  <img src="https://github.com/carmenxufdz/practicasUGR/SIBW/P1/esquema.jpg" alt="Figura 1"/>
+  <img src="çhttps://github.com/carmenxufdz/practicasUGR/blob/main/SIBW/P1/esquema.jpg" alt="Figura 1"/>
 </p>
 
 ## Resolución de la Práctica
